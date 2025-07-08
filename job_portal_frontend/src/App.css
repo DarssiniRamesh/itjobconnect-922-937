@@ -20,6 +20,104 @@
   --button-bg: #0056b3;
   --button-text: #ffffff;
 }
+/* Authentication form styles */
+.auth-container {
+  background: var(--bg-secondary);
+  max-width: 400px;
+  margin: 40px auto 0;
+  padding: 32px 24px 28px;
+  border-radius: 12px;
+  box-shadow: 0 2px 24px rgba(32,32,40, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: var(--text-primary);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.auth-form label {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.auth-form input {
+  margin-top: 4px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 15px;
+  background: #fff;
+  color: #181a21;
+  outline: none;
+  transition: border 0.2s;
+}
+
+[data-theme="dark"] .auth-form input {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.auth-form input:focus {
+  border-color: var(--text-secondary);
+}
+
+.auth-form .btn {
+  margin-top: 6px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 7px;
+  font-size: 15px;
+  padding: 10px 0;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.18s;
+}
+
+.auth-form .btn:disabled {
+  background: #6c7a90;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.form-error {
+  margin-top: 4px;
+  color: #d1043c;
+  font-size: 14px;
+  font-weight: 500;
+}
+.form-success {
+  margin-top: 4px;
+  color: #239b56;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.auth-links {
+  text-align: center;
+  font-size: 15px;
+  margin-top: 14px;
+}
+
+.auth-links a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+
+.auth-links a:hover {
+  color: var(--button-bg);
+}
+
 
 .App {
   text-align: center;
