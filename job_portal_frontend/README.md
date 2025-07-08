@@ -9,6 +9,17 @@ This project provides a minimal React template with a clean, modern UI and minim
 - **Fast**: Minimal dependencies for quick loading times
 - **Simple**: Easy to understand and modify
 
+## API Backend URL Configuration
+
+This frontend needs to know the backend API URL for proper operation.  
+Create a `.env` file at the project root (`job_portal_frontend/`) with the following variable:
+
+```
+REACT_APP_BACKEND_URL=http://localhost:3001
+```
+
+Set the correct backend address as needed for development or production.
+
 ## Getting Started
 
 In the project directory, you can run:
