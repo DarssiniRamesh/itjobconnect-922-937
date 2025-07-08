@@ -5,22 +5,31 @@ import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { AuthProvider, useAuth } from "./AuthContext";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
+import JobListPage from "./JobListPage";
 
-// Minimal main page for demo
+// Minimal main page: For demo, route '/' to jobs page (also acts as welcome/dashboard)
 function Home() {
   const { isAuthenticated, profile, logout } = useAuth();
   return (
     <div>
-      <h2>Welcome to the IT Job Portal</h2>
-      {isAuthenticated && profile && (
-        <>
-          <div style={{ margin: "1rem 0" }}>
+      <nav style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 18,
+        marginBottom: 26,
+        justifyContent: "center"
+      }}>
+        <Link to="/jobs" className="btn" style={{ background: "var(--button-bg)", color: "var(--button-text)" }}>
+          Jobs
+        </Link>
+        {isAuthenticated ? (
+          <>
             <span>
-              Logged in as <b>{profile.username || profile.email}</b>
+              Welcome, <b>{(profile && (profile.username || profile.email)) || "User"}</b>
             </span>
             <button
               style={{
-                marginLeft: 18,
+                marginLeft: 6,
                 padding: "4px 16px",
                 borderRadius: "6px",
                 border: "none",
@@ -33,22 +42,20 @@ function Home() {
             >
               Logout
             </button>
-          </div>
-          <div>
-            <em>(Job listings and dashboard coming soon...)</em>
-          </div>
-        </>
-      )}
-      {!isAuthenticated && (
-        <div style={{ margin: "1.5rem 0" }}>
-          <Link to="/login" className="btn" style={{ marginRight: "12px" }}>
-            Login
-          </Link>
-          <Link to="/register" className="btn">
-            Register
-          </Link>
-        </div>
-      )}
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="btn" style={{ marginRight: "6px" }}>
+              Login
+            </Link>
+            <Link to="/register" className="btn">
+              Register
+            </Link>
+          </>
+        )}
+      </nav>
+      {/* Always render job list on home */}
+      <JobListPage />
     </div>
   );
 }
@@ -92,10 +99,10 @@ function App() {
               <Route
                 path="/"
                 element={
-                  // Protect this route if needed for authenticated content
                   <Home />
                 }
               />
+              <Route path="/jobs" element={<JobListPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
             </Routes>

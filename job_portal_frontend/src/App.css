@@ -191,12 +191,34 @@
   }
 }
 
-/* Responsive design for mobile */
+/* --- Jobs listing --- */
+.job-list-page .job-filter-form input[type="text"] {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 15px;
+  padding: 7px 10px;
+}
+
+/* Make job card and filter mobile-friendly */
 @media (max-width: 768px) {
   .theme-toggle {
     top: 10px;
     right: 10px;
     padding: 8px 16px;
     font-size: 12px;
+  }
+  .job-list-page {
+    padding: 5px !important;
+  }
+  .job-list-page .job-filter-form {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 8px;
+  }
+  .job-card {
+    padding: 13px 7px !important;
+    font-size: 14px;
   }
 }
