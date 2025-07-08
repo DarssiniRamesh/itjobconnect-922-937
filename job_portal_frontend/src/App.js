@@ -34,8 +34,19 @@ function MainNavBar({ theme, onToggleTheme }) {
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
         <img src={logo} alt="logo" style={{ height: 36, marginLeft: 18, marginRight: 10 }} />
-        <span className="title" style={{ fontWeight: 800, fontSize: 21, color: "var(--button-bg)" }}>
-          IT Job Portal
+        <span
+          className="title"
+          style={{
+            fontWeight: "bold",
+            fontFamily: 'Inter, "Segoe UI", Roboto, Arial, sans-serif',
+            fontSize: 21,
+            color: "rgb(26, 35, 126)",
+            fontStyle: "italic",
+            textDecoration: "underline",
+            textAlign: "left"
+          }}
+        >
+          KAVIA IT Job Portal
         </span>
         <Link
           to="/jobs"
