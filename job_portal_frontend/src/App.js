@@ -6,8 +6,11 @@ import { AuthProvider, useAuth } from "./AuthContext";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import JobListPage from "./JobListPage";
+import EmployerDashboard from "./EmployerDashboard";
 
-// Minimal main page: For demo, route '/' to jobs page (also acts as welcome/dashboard)
+/**
+ * Minimal main page: For demo, route '/' to jobs page (also acts as welcome/dashboard)
+ */
 function Home() {
   const { isAuthenticated, profile, logout } = useAuth();
   return (
@@ -24,6 +27,12 @@ function Home() {
         </Link>
         {isAuthenticated ? (
           <>
+            {/* Only show for employer */}
+            {profile && profile.role === "employer" && (
+              <Link to="/employer/dashboard" className="btn" style={{ background: "#2196f3", color: "#fff" }}>
+                Employer Dashboard
+              </Link>
+            )}
             <span>
               Welcome, <b>{(profile && (profile.username || profile.email)) || "User"}</b>
             </span>
@@ -105,6 +114,14 @@ function App() {
               <Route path="/jobs" element={<JobListPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route
+                path="/employer/dashboard"
+                element={
+                  <PrivateRoute>
+                    <EmployerDashboard />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </BrowserRouter>
         </header>

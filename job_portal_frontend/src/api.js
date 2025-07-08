@@ -131,6 +131,55 @@ export const JobService = {
   },
 
   /**
+   * List all jobs posted by the current (employer) user.
+   * @param {string} token Auth token.
+   */
+  listMyJobs(token) {
+    return apiRequest("/employer/jobs", {
+      method: "GET",
+      token,
+    });
+  },
+
+  /**
+   * Update an existing job posting (employer only, requires token)
+   * @param {string} jobId
+   * @param {object} payload
+   * @param {string} token
+   */
+  updateJob(jobId, payload, token) {
+    return apiRequest(`/jobs/${jobId}`, {
+      method: "PUT",
+      body: payload,
+      token,
+    });
+  },
+
+  /**
+   * Delete a job posting (employer only, requires token)
+   * @param {string} jobId
+   * @param {string} token
+   */
+  deleteJob(jobId, token) {
+    return apiRequest(`/jobs/${jobId}`, {
+      method: "DELETE",
+      token,
+    });
+  },
+
+  /**
+   * Get all applications submitted for a specific job (employer only, requires token)
+   * @param {string} jobId
+   * @param {string} token
+   */
+  getJobApplications(jobId, token) {
+    return apiRequest(`/jobs/${jobId}/applications`, {
+      method: "GET",
+      token,
+    });
+  },
+
+  /**
    * Apply to a job (job seeker, requires token).
    * @param {string} jobId
    * @param {object} payload (e.g. application data)
@@ -146,3 +195,4 @@ export const JobService = {
 };
 
 // Example: export other services (ProfileService, NotificationService, etc) here in the future
+
