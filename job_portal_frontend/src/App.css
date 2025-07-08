@@ -1,26 +1,29 @@
 /* CSS Variables for Theme Management */
 :root {
   /* Light theme colors */
-  --bg-primary: #ffffff;
+  --bg-primary: #fff;
   --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
+  --text-primary: #24273a;
+  --text-secondary: #1a237e;
+  --accent-color: #ff9800;
   --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --button-bg: #1a237e;
+  --button-text: #fff;
+  --navbar-height: 62px;
 }
 
 [data-theme="dark"] {
   /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
+  --bg-primary: #17181c;
+  --bg-secondary: #23243a;
+  --text-primary: #eee;
   --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
+  --border-color: #292929;
+  --button-bg: #2196f3;
   --button-text: #ffffff;
+  --accent-color: #ff9800;
 }
-/* Authentication form styles */
+/* -- Auth container / forms -- */
 .auth-container {
   background: var(--bg-secondary);
   max-width: 400px;
@@ -40,14 +43,12 @@
   gap: 18px;
   margin-top: 8px;
 }
-
 .auth-form label {
   text-align: left;
   font-size: 15px;
   font-weight: 500;
 }
-
-.auth-form input {
+.auth-form input, .auth-form textarea, .auth-form select {
   margin-top: 4px;
   padding: 9px 12px;
   border: 1px solid var(--border-color);
@@ -58,17 +59,18 @@
   outline: none;
   transition: border 0.2s;
 }
-
-[data-theme="dark"] .auth-form input {
+[data-theme="dark"] .auth-form input,
+[data-theme="dark"] .auth-form textarea,
+[data-theme="dark"] .auth-form select {
   background: var(--bg-primary);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
 }
-
-.auth-form input:focus {
+.auth-form input:focus,
+.auth-form textarea:focus,
+.auth-form select:focus {
   border-color: var(--text-secondary);
 }
-
 .auth-form .btn {
   margin-top: 6px;
   background: var(--button-bg);
@@ -81,7 +83,6 @@
   font-weight: 700;
   transition: background 0.18s;
 }
-
 .auth-form .btn:disabled {
   background: #6c7a90;
   cursor: not-allowed;
@@ -106,92 +107,132 @@
   font-size: 15px;
   margin-top: 14px;
 }
-
 .auth-links a {
   color: var(--text-secondary);
   text-decoration: underline;
   font-weight: 600;
   transition: color 0.15s;
 }
-
 .auth-links a:hover {
   color: var(--button-bg);
 }
 
-
+/* -- App Layout -- */
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
+  background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 100vw;
+  transition: background-color 0.32s ease, color 0.32s ease;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+.main-content {
+  min-height: calc(100vh - var(--navbar-height,62px));
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+/* -- Navbar -- */
+.navbar {
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: var(--bg-secondary);
+  border-bottom: 1.3px solid var(--border-color);
+  box-shadow: 0 2px 10px rgba(28,30,42,0.07);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  justify-content: space-between;
+  height: var(--navbar-height, 62px);
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 120;
 }
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.navbar > * {
+  flex-shrink: 1;
 }
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
+.navbar .btn, .navbar .nav-btn {
+  margin-left: 9px;
+  margin-right: 0;
+  padding: 7px 18px;
+  font-size: 15px;
+  border-radius: 7px;
+  transition: background 0.15s, color 0.15s;
+  font-weight: 700;
+  background: var(--button-bg);
   color: var(--button-text);
   border: none;
+  outline: none;
+}
+.navbar .btn.active, .navbar .nav-btn.active,
+.navbar .btn:hover, .navbar .nav-btn:hover {
+  background: var(--accent-color, #ff9800);
+  color: #fff;
+}
+.navbar img[alt="logo"] {
+  box-shadow: 0 2px 12px rgba(30,30,44,0.04);
+  background: #fff;
   border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  border: 1px solid var(--border-color);
+}
+
+/* Universal button style */
+.btn {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 7px;
+  padding: 8px 22px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  font-size: 15px;
+  min-width: 90px;
+  transition: background 0.17s, color 0.17s;
+}
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+/* Main section container style */
+.container {
+  background: var(--bg-secondary);
+  border-radius: 17px;
+  box-shadow: 0 2px 20px rgba(50,54,74,0.06);
+  margin: 0 auto 32px auto;
+  padding: 30px 26px 30px 26px;
+  width: 100%;
+  max-width: 980px;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+/* Headings */
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-secondary);
+}
+.subtitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+.description {
+  color: #666;
+  font-size: 16px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Jobs Cards/Listing */
+.job-card {
+  background: var(--bg-primary);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 12px rgba(36,44,60,0.04);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 15.7px;
 }
 
-/* --- Jobs listing --- */
 .job-list-page .job-filter-form input[type="text"] {
   background: var(--bg-primary);
   color: var(--text-primary);
@@ -201,13 +242,64 @@
   padding: 7px 10px;
 }
 
-/* Make job card and filter mobile-friendly */
+.theme-toggle {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-left: 18px;
+}
+.theme-toggle:hover,
+.theme-toggle:focus {
+  transform: translateY(-1.5px) scale(1.02);
+  opacity: 0.95;
+}
+
+/* Responsive design updates */
+@media (max-width: 1050px) {
+  .container { max-width: 99vw; }
+}
+@media (max-width: 900px) {
+  .container {
+    max-width: 99vw;
+    padding: 19px 6px;
+  }
+}
 @media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .container {
+    max-width: 100vw;
+    padding: 8px 4px 9px 4px;
+    border-radius: 6px;
+  }
+  .navbar, .App-header {
+    font-size: 16px;
+    min-height: unset;
+    flex-direction: column;
+    height: unset;
+    box-shadow: none;
+    padding: 0 0 8px 0;
+    gap: 2px;
+  }
+  .navbar .btn, .navbar .nav-btn {
+    font-size: 13.5px;
+    padding: 6px 10px;
+    min-width: 50px;
+    margin-left: 2px;
+  }
+  .App-logo {
+    height: 60px;
+    margin: 0 auto 0 auto;
+    display: block;
+  }
+  .main-content {
+    padding: 8px 0 !important;
+    min-height: unset;
   }
   .job-list-page {
     padding: 5px !important;
@@ -218,7 +310,46 @@
     padding: 10px 8px;
   }
   .job-card {
-    padding: 13px 7px !important;
+    padding: 14px 7px !important;
     font-size: 14px;
   }
+}
+
+/* Utility: hide scrollbars for neat appearance */
+::-webkit-scrollbar {
+  width: 9px;
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 7px;
+}
+
+/* Animation for logo for visual polish */
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg);}
+  to   { transform: rotate(360deg);}
+}
+.App-logo {
+  height: 42px;
+  pointer-events: none;
+  margin: 6px 0 6px 0;
+  animation: App-logo-spin infinite 20s linear;
+}
+
+/* Links */
+a {
+  color: var(--button-bg);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+a:hover {
+  color: var(--accent-color, #ff9800);
+}
+
+/* Error/fallback section styling */
+.not-found {
+  padding: 48px;
+  text-align: center;
+  color: #777;
 }
