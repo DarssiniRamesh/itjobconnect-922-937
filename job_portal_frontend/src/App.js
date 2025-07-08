@@ -7,7 +7,8 @@ import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import JobListPage from "./JobListPage";
 import EmployerDashboard from "./EmployerDashboard";
-
+import ProfilePage from "./ProfilePage";
+import NotificationsPanel from "./NotificationsPanel";
 /**
  * Minimal main page: For demo, route '/' to jobs page (also acts as welcome/dashboard)
  */
@@ -33,6 +34,12 @@ function Home() {
                 Employer Dashboard
               </Link>
             )}
+            <Link to="/profile" className="btn" style={{ background: "#ff9800", color: "#fff" }}>
+              Profile
+            </Link>
+            <Link to="/notifications" className="btn" style={{ background: "#dedc35", color: "#212121" }}>
+              Notifications
+            </Link>
             <span>
               Welcome, <b>{(profile && (profile.username || profile.email)) || "User"}</b>
             </span>
@@ -119,6 +126,22 @@ function App() {
                 element={
                   <PrivateRoute>
                     <EmployerDashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <ProfilePage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/notifications"
+                element={
+                  <PrivateRoute>
+                    <NotificationsPanel />
                   </PrivateRoute>
                 }
               />

@@ -194,5 +194,25 @@ export const JobService = {
   }
 };
 
-// Example: export other services (ProfileService, NotificationService, etc) here in the future
+/** Profile and Notifications API clients */
+export const ProfileService = {
+  // PUBLIC_INTERFACE
+  getProfile(token) {
+    return apiRequest("/auth/me", { method: "GET", token });
+  },
+  // PUBLIC_INTERFACE
+  updateProfile(payload, token) {
+    return apiRequest("/profile", { method: "PUT", body: payload, token });
+  },
+};
 
+export const NotificationService = {
+  // PUBLIC_INTERFACE
+  listNotifications(token) {
+    return apiRequest("/notifications", { method: "GET", token });
+  },
+  // PUBLIC_INTERFACE
+  markAsRead(id, token) {
+    return apiRequest(`/notifications/${id}/read`, { method: "POST", token });
+  },
+};
